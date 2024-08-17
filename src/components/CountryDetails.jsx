@@ -12,7 +12,6 @@ export default function CountryDetail() {
      const params = useParams()
      const countryName = params.country
      const {state}=useLocation()
-
      const [countryData, setCountryData] = useState(null)
      const [notFound, setNotFound] = useState(false)
 
@@ -47,31 +46,36 @@ export default function CountryDetail() {
     }
      
      useEffect(() => {
-      if (state) {
-        updateCountryData(state)
-        return
-      }
-
-      fetch(`https://restcountries.com/v3.1/name/${countryName}?fullText=true`)
+       if (state) {
+         updateCountryData(state)
+         document.title=`${countryName}`
+         document.querySelector('.favicon').href=state.flags.svg
+         return
+        }
+        
+        fetch(`https://restcountries.com/v3.1/name/${countryName}?fullText=true`)
         .then((res) => res.json())
         .then(([data]) => {
           updateCountryData(data)
+          document.title=`${countryName}`
+          document.querySelector('.favicon').href=data.flags.svg
         })
         .catch((err) => {
           console.log(err)
           setNotFound(true)
         })
-     }, [countryName])
-
-
-     if(notFound) {
-      return <div>Country Not Found</div>
-    }
-
-     return countryData === null ? (
-      'loading...'
-    ) : (
-    <main className={`${isDark? 'dark': ''}`}>
+      }, [countryName])
+      
+      
+      if(notFound) {
+        return <div>Country Not Found</div>
+      }
+      
+      return countryData === null ? (
+        'loading...'
+      ) : (
+        //document.title=`${countryName}`,
+        <main className={`${isDark? 'dark': ''}`}>
       <div className="country-details-container">
         <span className="back-button" onClick={() => history.back()}>
           <i className="fa-solid fa-arrow-left"></i>&nbsp; Back
