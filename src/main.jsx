@@ -3,8 +3,8 @@ import App from './App.jsx'
 import { createBrowserRouter,RouterProvider } from 'react-router-dom'
 import { Error } from './components/Error.jsx'
 import { Home } from './components/Home.jsx'
-import { CountryDetail } from './components/countryDetail.jsx'
-
+//import { CountryDetail } from './components/countryDetail.jsx'
+import CountryDetail from './components/CountryDetails.jsx'
 
 
 const router = createBrowserRouter([
@@ -18,12 +18,9 @@ const router = createBrowserRouter([
           element: <Home />,
         },
         {
-          path: '/contact',
-          //element: <Contact />,
-        },
-        {
           path: '/:country',
-          element: <CountryDetail />,
+        element: <CountryDetail />,
+
         },
       ],
     },
