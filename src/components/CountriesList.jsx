@@ -7,11 +7,11 @@ export const CountriesList = ({ query }) => {
     const [countriesData, setCountriesData] = useState([])
 
     useEffect(() => {
-        fetch('https://restcountries.com/v3.1/all?fields=name,flags,population,region,capital')
+        fetch('https://restcountries.com/v3.1/all?fields=name,flags,population,region,subregion,capital,languages,currencies,tld,borders')
           .then((res) => res.json())
           .then((data) => {
             setCountriesData(data)
-            //console.log(data)
+            console.log(data)
         })
       }, [])
 
